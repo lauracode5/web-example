@@ -3,29 +3,30 @@ import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { saga } from './saga';
-import { key, countriesReducer } from './reducer';
+import { key, countryReducer } from './reducer';
 import { actions } from './actions';
-import { selectCountries, selectLoading, selectError } from './selectors';
+import { selectCountry, selectLoading, selectError } from './selectors';
 import { LoadingIndicator } from 'app/components/LoadingIndicator';
 import { Link } from 'app/components/Link';
 import { PageWrapper } from 'app/components/PageWrapper';
 
-export function Countries() {
-  useInjectReducer({ key: key, reducer: countriesReducer });
+export function OneCountry() {
+  useInjectReducer({ key: key, reducer: countryReducer });
   useInjectSaga({ key: key, saga });
 
-  const countries = useSelector(selectCountries);
+  const countries = useSelector(selectCountry);
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.fetchCountries());
+    dispatch(actions.fetchCountry());
   }, [dispatch]);
+
 
   return (
     <PageWrapper>
-      <h1>Countries</h1>
+      <h1>Country</h1>
       {isLoading && <LoadingIndicator small />}
       {countries?.length > 0 ? (
         <List>
@@ -37,7 +38,10 @@ export function Countries() {
           ))}
         </List>
       ) : error ? (
-        <ErrorText>{error}</ErrorText>
+        <div>
+          <ErrorText>{error}</ErrorText>
+          <h1>New Error Page</h1>
+        </div>
       ) : null}
     </PageWrapper>
   );
