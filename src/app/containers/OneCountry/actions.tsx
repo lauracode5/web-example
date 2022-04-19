@@ -1,6 +1,17 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const fetchCountry = createAction('FETCH_COUNTRY_REQUEST');
+// pulling in id from the country (see OneCountry/index.tsx; let { id } = useParams<OneCountryParams>();)
+// then sending it as part of the payload in 'FETCH_COUNTRY_REQUEST'
+const fetchCountry = createAction(
+  'FETCH_COUNTRY_REQUEST',
+  countryId => { // declaring the parameter
+    return {
+      payload: {
+        countryId,
+      }
+    }
+  }
+);
 
 const fetchCountrySuccess = createAction(
   'FETCH_COUNTRY_SUCCESS',
