@@ -14,7 +14,7 @@ export function OneCountry() {
   useInjectReducer({ key: key, reducer: countryReducer });
   useInjectSaga({ key: key, saga });
 
-  const countries = useSelector(selectCountry);
+  const country = useSelector(selectCountry);
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
@@ -23,36 +23,25 @@ export function OneCountry() {
     dispatch(actions.fetchCountry());
   }, [dispatch]);
 
+  // console.log('COUNTRY::::', country);
+  // console.log("COUNTRY NAME::::", country.name);
+  // console.log("COUNTRY CURRENCY CODE::::", country.currency_code);
 
   return (
     <PageWrapper>
-      <h1>Country</h1>
-      {isLoading && <LoadingIndicator small />}
-      {countries?.length > 0 ? (
-        <List>
-          {countries.map(country => (
-            // Country here is a styled component. See below.
-            <Country key={country.id}>
-              <Link to={`/country/${country.id}`}>{country.name}</Link>
-            </Country>
-          ))}
-        </List>
-      ) : error ? (
-        <div>
-          <ErrorText>{error}</ErrorText>
-          <h1>New Error Page</h1>
-        </div>
-      ) : null}
+      <h1>Country Information</h1>
+      <p>Country Name: {country.name}</p>
+      <p>Country Currency Code: {country.currency_code}</p>
     </PageWrapper>
   );
 }
 
-const Country = styled.li`
-  color: blue;
-`;
+// const Country = styled.li`
+//   color: blue;
+// `;
 
-const ErrorText = styled.span`
-  color: ${p => p.theme.text};
-`;
+// const ErrorText = styled.span`
+//   color: ${p => p.theme.text};
+// `;
 
-const List = styled.div``;
+// const List = styled.div``;

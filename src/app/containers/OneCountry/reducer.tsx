@@ -4,7 +4,11 @@ import { CountryState } from './types';
 export const key = 'country';
 
 export const initialState: CountryState = {
-  country: [],
+  country: {
+    id: '',
+    name: '',
+    currency_code: '',
+  },
   error: undefined,
   isLoading: false,
 };

@@ -4,5 +4,5 @@ import { Country } from 'types/Country';
 export interface CountryState {
   isLoading: boolean;
   error?: string;
-  country: Country[];
+  country: Country;
 }
