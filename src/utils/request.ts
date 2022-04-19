@@ -31,6 +31,12 @@ function checkStatus(response: Response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
+  // this handles 400 level errors
+  // and leaves the catch block for 500 level network errors.
+  // You can comment this out to test the catch block errors. - LAU
+  if (response.status >=400 && response.status < 500 ) {
+    return response;
+  }
   const error = new ResponseError(response);
   error.response = response;
   throw error;

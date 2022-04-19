@@ -34,16 +34,15 @@ export function OneCountry() {
     dispatch(actions.fetchCountry(id));
   }, [dispatch]);
 
-  // console.log('COUNTRY::::', country);
-  // console.log("COUNTRY NAME::::", country.name);
-  // console.log("COUNTRY CURRENCY CODE::::", country.currency_code);
-
   return (
     <PageWrapper>
       <h1>Country Information</h1>
       {isLoading ? <LoadingIndicator small />
       : error ? (
-        <ErrorText>{error}</ErrorText>
+        <CountryInfo>
+          <p>We're sorry:</p>
+          <ErrorText>{error}</ErrorText>
+        </CountryInfo>
       ) : (
         <CountryInfo>
           <p>Name: <CountryLabel>{country.name}</CountryLabel></p>
@@ -57,11 +56,11 @@ export function OneCountry() {
 const CountryInfo = styled.div``;
 
 const CountryLabel = styled.span`
-  color: blue;
+  color: #d77158;
 `;
 
 const ErrorText = styled.span`
-  color: ${p => p.theme.text};
+  color: red;
 `;
 
 
